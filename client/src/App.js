@@ -34,7 +34,7 @@ function Navigation(props) {
   );
 }
 
-
+//<Route path="/posts/:id" component={ShowPostPage} />
 class App extends React.Component {
   render() {
     return (
@@ -44,7 +44,7 @@ class App extends React.Component {
             <div className="row justify-content-center">
               <Switch>
                 <Route path="/posts/new" component={PostFormPage} />
-                <Route path="/posts/:id" component={ShowPostPage} />
+                
                 <Route path="/about-us" component={AboutUsPage} />
                 <Route path="/" component={PostsListPage} />
               </Switch>

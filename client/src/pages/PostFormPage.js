@@ -5,7 +5,8 @@ class PostFormPage extends React.Component {
   state = {
     error: false,
     success: false,
-    content: '',
+    content: {},
+    data: {}
   }
 
   contentChanged = (event) => {
@@ -15,6 +16,28 @@ class PostFormPage extends React.Component {
   }
 
   savePost = (event) => {
+    fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${JSON.stringify({content: this.state.content})}?`, {
+      method: 'GET',
+      //credentials: 'include',
+      headers: {
+        //'Content-Type': 'application/json',
+        'x-app-id': '77c2e13e',
+        'x-app-key': '3c22057fca929e4d304bb51594d913f4'
+      },
+      //body: JSON.stringify({content: this.state.content}),
+    })
+      .then(res => {
+        if(res.ok){
+          return res.json()
+        }
+        throw new Error('Content validation'); 
+      })
+      .then(post => {
+        this.setState({
+          content: post,
+        })
+      })
+      .then(
     fetch("/api/posts/", {
       method: 'POST',
       credentials: 'include',
@@ -24,6 +47,7 @@ class PostFormPage extends React.Component {
       body: JSON.stringify({content: this.state.content}),
     })
       .then(res => {
+        
         if(res.ok) {
           return res.json()
         }
@@ -31,15 +55,17 @@ class PostFormPage extends React.Component {
         throw new Error('Content validation');
       })
       .then(post => {
+        
         this.setState({
           success: true,
+          content: post
         });
       })
       .catch(err => {
         this.setState({
           error: true,
         });
-      });
+      }));
   }
 
   render() {

@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         len: [3, 250],
         notEmpty: true,
       }
-    },
+    }
   }, {
     sequelize,
     modelName: 'post'
