@@ -34,8 +34,8 @@ class PostFormPage extends React.Component {
       })
       .then(post => {
         this.setState({
-          content: post,
-        })
+          data: post,
+        });
       })
       .then(
     fetch("/api/posts/", {
@@ -44,7 +44,7 @@ class PostFormPage extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({content: this.state.content}),
+      body: JSON.stringify({content: this.state.data}),
     })
       .then(res => {
         
