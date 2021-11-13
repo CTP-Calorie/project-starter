@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
     });
 });
 
-/*
+
 router.get('/:id', (req, res) => {
   const { id } = req.params;
   Post.findByPk(id)
@@ -45,9 +45,7 @@ router.get('/:id', (req, res) => {
       res.json(post);
     });
 });
-*/
 
-/*
 router.put('/:id', (req, res) => {
   const { id } = req.params;
   Post.findByPk(id)
@@ -66,9 +64,7 @@ router.put('/:id', (req, res) => {
         });
     });
 });
-*/
 
-/*
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
   Post.findByPk(id)
@@ -81,6 +77,5 @@ router.delete('/:id', (req, res) => {
       res.sendStatus(204);
     });
 });
-*/
 
 module.exports = router;

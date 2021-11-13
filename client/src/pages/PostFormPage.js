@@ -6,7 +6,7 @@ class PostFormPage extends React.Component {
     error: false,
     success: false,
     content: {},
-    data: {}
+    data: ''
   }
 
   contentChanged = (event) => {
@@ -15,17 +15,21 @@ class PostFormPage extends React.Component {
     });
   }
 
+
   savePost = (event) => {
-    fetch(`https://trackapi.nutritionix.com/v2/search/instant?query=${JSON.stringify({content: this.state.content})}?`, {
+    const url = 'https://trackapi.nutritionix.com/v2/search/instant?query=';
+    const options = {
       method: 'GET',
-      //credentials: 'include',
       headers: {
-        //'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         'x-app-id': '77c2e13e',
         'x-app-key': '3c22057fca929e4d304bb51594d913f4'
       },
       //body: JSON.stringify({content: this.state.content}),
-    })
+    }
+
+
+    fetch(`${url}${JSON.stringify({content: this.state.content})}?`, options)
       .then(res => {
         if(res.ok){
           return res.json()
@@ -47,7 +51,7 @@ class PostFormPage extends React.Component {
       body: JSON.stringify({content: this.state.data}),
     })
       .then(res => {
-        
+        console.log(this.state.data);
         if(res.ok) {
           return res.json()
         }
