@@ -36,11 +36,13 @@ class PostFormPage extends React.Component {
         }
         throw new Error('Content validation'); 
       })
+      // Error is here
       .then(post => {
         this.setState({
           data: post,
         });
       })
+      // but before here
       .then(
     fetch("/api/posts/", {
       method: 'POST',
