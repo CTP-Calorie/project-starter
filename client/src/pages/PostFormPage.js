@@ -19,9 +19,6 @@ class PostFormPage extends React.Component {
   savePost = (event) => {
    
     let url = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
-    let food = this.state.content;
-    console.log(food)
-    
     let options = {
       method: 'POST',
       headers: {
@@ -32,53 +29,50 @@ class PostFormPage extends React.Component {
       body: '{"query":"2 small eggs wtih 1 slice of american cheese","timezone":"US/Eastern"}'
     };
     
+    const url2 = '/api/posts/';
+
       //body: JSON.stringify({content: this.state.content}),
     
     fetch(url, options)
-    .then(res => res.json())
-    .then(json => console.log(json))
-    .catch(err => console.error('error:' + err));
-
-
-    fetch(url, options)
-      .then(res => {
-        if(res.ok){
-          return res.json()
-        }
-        throw new Error('Content validation'); 
-      })
-      // Error is here
-      
-      // but before here
-      .then(
-    fetch("/api/posts/", {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({content: this.state.data}),
+    .then(res => {
+      return res.json()
     })
-      .then(res => {
-        console.log(this.state.data);
-        if(res.ok) {
-          return res.json()
-        }
+    .then(json => {
+      /*
+        Process data elsewhere to get a string to put into the db
 
-        throw new Error('Content validation');
+      */
+      return fetch(url2, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({content: json}),
       })
-      .then(post => {
-        
-        this.setState({
-          success: true,
-          content: post
-        });
-      })
-      .catch(err => {
-        this.setState({
-          error: true,
-        });
-      }));
+    })
+    .then(res => {
+      if(res.ok) {
+        return res.json()
+      }
+
+      throw new Error('Content validation');
+    })
+    .then(post => {
+      
+      this.setState({
+        success: true,
+        content: post
+      });
+    })
+    .catch(err => {
+      this.setState({
+        error: true,
+      });
+      console.error('error:' + err);
+    })
+
+    
   }
 
 
