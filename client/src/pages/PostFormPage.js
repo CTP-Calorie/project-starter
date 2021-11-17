@@ -19,6 +19,8 @@ class PostFormPage extends React.Component {
   savePost = (event) => {
    
     let url = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
+    const url2 = '/api/posts/';
+    
     let options = {
       method: 'POST',
       headers: {
@@ -26,29 +28,29 @@ class PostFormPage extends React.Component {
         'x-app-key': '2b1d3ac6953cbfa43b65bcbbd5066e71',
         'Content-Type': 'application/json'
       },
-      body: '{"query":"2 small eggs wtih 1 slice of american cheese","timezone":"US/Eastern"}'
+      body: `{
+        "query": "apple",
+        "timezone": "US/Eastern"
+        }`,
     };
     
-    const url2 = '/api/posts/';
-
-      //body: JSON.stringify({content: this.state.content}),
     
     fetch(url, options)
     .then(res => {
+      console.log(this.state.content);
       return res.json()
     })
     .then(json => {
-      /*
-        Process data elsewhere to get a string to put into the db
+      const calories = `food name: ${json['foods'][0]['nf_calories']}`;
 
-      */
+
       return fetch(url2, {
         method: 'POST',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({content: json}),
+        body: JSON.stringify({content: calories}),
       })
     })
     .then(res => {
