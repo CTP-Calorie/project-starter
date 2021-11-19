@@ -1,5 +1,9 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+const {x_app_id, x_app_key} = require('./secrets.json');
+
+//const authorization = require('./auth/credentials.json');
+
 
 class PostFormPage extends React.Component {
   state = {
@@ -9,27 +13,25 @@ class PostFormPage extends React.Component {
   }
 
   contentChanged = (event) => {
-    console.log(event.target.value);
     this.setState({
-      content: event.target.value
-      
+      content: event.target.value   
     });
   }
 
   savePost = (event) => {
-   
+    console.log(x_app_id + "Hello Wolrd")
     let url = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
     const url2 = '/api/posts/';
     
     let options = {
       method: 'POST',
       headers: {
-        'x-app-id': 'a309c216',
-        'x-app-key': '2b1d3ac6953cbfa43b65bcbbd5066e71',
+        'x-app-id': x_app_id,
+        'x-app-key': x_app_key,
         'Content-Type': 'application/json'
       },
       body: `{
-        "query": "apple",
+        "query": "${this.state.content}",
         "timezone": "US/Eastern"
         }`,
     };
@@ -41,7 +43,7 @@ class PostFormPage extends React.Component {
       return res.json()
     })
     .then(json => {
-      const calories = `food name: ${json['foods'][0]['nf_calories']}`;
+      const calories = `${this.state.content}: ${json['foods'][0]['nf_calories']}`;
 
 
       return fetch(url2, {
