@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-// const {x_app_id, x_app_key} = require('./secrets.json');
+const {x_app_id, x_app_key} = require('./secrets.json');
 
 //const authorization = require('./auth/credentials.json');
 
@@ -40,14 +40,14 @@ class PostFormPage extends React.Component {
   }
 
   savePost = (event) => {
-        let url = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
+    let url = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
     const url2 = '/api/posts/';
     
     const options = {
       method: 'POST',
       headers: {
-        'x-app-id': 'a309c216',
-        'x-app-key': '2b1d3ac6953cbfa43b65bcbbd5066e71',
+        'x-app-id': x_app_id,
+        'x-app-key': x_app_key,
         'Content-Type': 'application/json'
       },
       body: `{
