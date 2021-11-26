@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-const {x_app_id, x_app_key} = require('./secrets.json');
+const {x_app_id, x_app_key} = require('./src/secrets.json');
 
 //const authorization = require('./auth/credentials.json');
 
