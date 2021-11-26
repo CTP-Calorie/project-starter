@@ -1,8 +1,8 @@
 import React from 'react';
-import { 
-  BrowserRouter as Router, 
-  Switch, 
-  Route, 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
   Link,
   NavLink
 } from 'react-router-dom';
@@ -12,6 +12,10 @@ import ShowPostPage from './pages/ShowPostPage';
 import AboutUsPage from './pages/AboutUsPage';
 
 import './App.css';
+import { AuthProvider } from './context/AuthContext';
+import AuthButton from './components/AuthButton';
+import LoginPage from './pages/LoginPage';
+import PrivateRoute from './components/PrivateRoute';
 
 
 function Navigation(props) {
@@ -30,27 +34,31 @@ function Navigation(props) {
           </NavLink>
         </li>
       </ul>
+      <AuthButton />
     </nav>
   );
 }
 
-//<Route path="/posts/:id" component={ShowPostPage} />
+
 class App extends React.Component {
   render() {
     return (
+      <AuthProvider>
         <Router>
           <Navigation />
           <div className="container-fluid text-center">
             <div className="row justify-content-center">
               <Switch>
-                <Route path="/posts/new" component={PostFormPage} />
-                
+                <Route path="/login" component={LoginPage} />
+                <PrivateRoute path="/posts/new" component={PostFormPage} />
+                <Route path="/posts/:id" component={ShowPostPage} />
                 <Route path="/about-us" component={AboutUsPage} />
                 <Route path="/" component={PostsListPage} />
               </Switch>
             </div>
           </div>
         </Router>
+      </AuthProvider>
     );
   }
 }

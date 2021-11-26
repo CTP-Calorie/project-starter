@@ -1,9 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-const {x_app_id, x_app_key} = require('./secrets.json');
-
-//const authorization = require('./auth/credentials.json');
-
+const {x_app_id, x_app_key} = require('./src/secrets.json');
 
 class PostFormPage extends React.Component {
   state = {
@@ -19,11 +16,10 @@ class PostFormPage extends React.Component {
   }
 
   savePost = (event) => {
-    console.log(x_app_id + "Hello Wolrd")
-    let url = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
+    const url = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
     const url2 = '/api/posts/';
     
-    let options = {
+    const options = {
       method: 'POST',
       headers: {
         'x-app-id': x_app_id,
@@ -35,8 +31,6 @@ class PostFormPage extends React.Component {
         "timezone": "US/Eastern"
         }`,
     };
-    
-    
     fetch(url, options)
     .then(res => {
       console.log(this.state.content);
@@ -45,14 +39,13 @@ class PostFormPage extends React.Component {
     .then(json => {
       const calories = `${this.state.content}: ${json['foods'][0]['nf_calories']}`;
 
-
       return fetch(url2, {
         method: 'POST',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({content: calories}),
+        body: {content: calories},
       })
     })
     .then(res => {
@@ -74,11 +67,8 @@ class PostFormPage extends React.Component {
         error: true,
       });
       console.error('error:' + err);
-    })
-
-    
+    })    
   }
-
 
   render() {
     if(this.state.success) return <Redirect to="/" />;
