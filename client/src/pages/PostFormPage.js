@@ -2,10 +2,7 @@
 import '../pages/nutrition.css'
 import { Redirect } from 'react-router-dom';
 const {x_app_id, x_app_key} = require('./src/secrets.json');
-<<<<<<< HEAD
 
-=======
->>>>>>> 3ef3d81846fd56a181f4d9045573e50826e7a27c
 
 //const authorization = require('./auth/credentials.json');
 
