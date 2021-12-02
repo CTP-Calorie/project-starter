@@ -1,35 +1,42 @@
-import React from 'react';
+  import React from 'react';
+import '../pages/nutrition.css'
 import { Redirect } from 'react-router-dom';
 const {x_app_id, x_app_key} = require('./src/secrets.json');
+<<<<<<< HEAD
+
+=======
+>>>>>>> 3ef3d81846fd56a181f4d9045573e50826e7a27c
 
 //const authorization = require('./auth/credentials.json');
 
-function App(props) {
-  return (<div className ="information">
-  
-    <ul> 
-      <li>Calories: {props.calories} </li>
-      <li>Cholesterol: {props.cholesterol}mg </li>
-      <li>Dietary_fiber: {props.dietary_fiber}g </li>
-      <li> potassium: {props.potassium}mg </li>
-      <li>Protein: {props.protein}g </li>
-      <li>saturated_fat: {props.saturated_fat}g </li>
-      <li>Sodium: {props.sodium}mg </li>
-      <li>Sugars: {props.sugars}g </li>
-      <li>total Carbohydrate: ({props.total_carbohydrate}g </li>
-      <li>total fat: {props.total_fat}g </li>
-      
+function App(props)
+{
+  return(
+    <div>
+      <ul>
+        <li><img src={props.img} alt='food'/></li>
+      </ul>
+    </div>
+  );
 
-    
-  </ul> 
-  </div>
-  )};
+}
+
 
 class PostFormPage extends React.Component {
   state = {
     error: false,
     success: false,
     content: '',
+    calories: 0,
+    Cholesterol: 0,
+    Dietary_fiber: 0,
+    potassium: 0,
+    Protein: 0,
+    saturated_fat: 0,
+    Sodium: 0,
+    Sugars : 0,
+    total_carbohydrate: 0,
+    total_fat: 0,
     items:[]
   }
 
@@ -62,9 +69,25 @@ class PostFormPage extends React.Component {
       return res.json()
     })
     .then((json) => {
-    
-      this.setState({items : json['foods']})
+      
+      this.setState({items : this.state.items.concat(json['foods']) })
+      this.setState({
+        calories : json['foods'][0].nf_calories + this.state.calories,
+        Cholesterol : json['foods'][0].nf_cholesterol + this.state.Cholesterol,
+        Dietary_fiber : json['foods'][0].nf_dietary_fiber + this.state.Dietary_fiber,
+        potassium : json['foods'][0].nf_potassium + this.state.potassium,
+        Protein : json['foods'][0].nf_protein + this.state.Protein,
+        Sugars : json['foods'][0].nf_sugars + this.state.Sugars,
+        saturated_fat : json['foods'][0].nf_saturated_fat + this.state.saturated_fat,
+        Sodium : json['foods'][0].nf_sodium + this.state.Sodium,
+        total_carbohydrate : json['foods'][0].nf_total_carbohydrate + this.state.total_carbohydrate,
+        total_fat : json['foods'][0].nf_total_fat + this.state.total_fat,
+        // items : json['foods'][0].photo.thumb
+ 
+
+      })
       console.log(this.state.items)
+      console.log(json)
       const calories = `${this.state.content}: ${json['foods'][0]['nf_calories']}`;
 
       return fetch(url2, {
@@ -124,20 +147,176 @@ class PostFormPage extends React.Component {
           <button className="btn btn-primary" onClick={this.savePost}>Save Post</button>
         </div>
         <div>
-          {this.state.items.map(item => 
-          <App
-           calories={item.nf_calories} 
-           cholesterol={item.nf_cholesterol} 
-           dietary_fiber={item.nf_dietary_fiber} 
-           potassium={item.nf_potassium} 
-           protein={item.nf_protein}
-           saturated_fat={item.nf_saturated_fat}
-           sodium={item.nf_sodium}
-           sugars={item.nf_sugars}
-           total_carbohydrate={item.nf_total_carbohydrate}
-           total_fat={item.nf_total_fat}/> )}
+          <div>
+            {/* <input type='text' placeholder='Enter Target Calories' onClick={}/> */}
+            <button className="btn btn-primary">Submit</button>
+          </div>
         </div>
+        <div>
+      <section className="performance-facts">
+  <header className="performance-facts__header">
+    <h1 className="performance-facts__title">Nutrition Facts</h1>
+    <p>Serving Size 1/2 cup (about 82g)</p>
+      <p>Serving Per Container 8</p>
+  </header>
+  <table className="performance-facts__table">
+    <thead>
+      <tr>
+        <th colSpan="3" className="small-info">
+          Amount Per Serving
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th colSpan="2">
+          <b>Calories:</b>
+           {this.state.calories}
+        </th>
+        <td>
+          Calories from Fat
+          0
+        </td>
+      </tr>
+      <tr className="thick-row">
+        <td colSpan="3" className="small-info">
+          <b>% Daily Value*</b>
+        </td>
+      </tr>
+      <tr>
+        <th colSpan="2">
+          <b>Total Fat</b>
+          {this.state.total_fat}g
+        </th>
+        <td>
+          <b>22%</b>
+        </td>
+      </tr>
+      <tr>
+        <td className="blank-cell">
+        </td>
+        <th>
+          Saturated Fat
+          {this.saturated_fat}g
+        </th>
+        <td>
+          <b>22%</b>
+        </td>
+      </tr>
+      <tr>
+        <td className="blank-cell">
+        </td>
+        <th>
+          Trans Fat
+          0g
+        </th>
+        <td>
+        </td>
+      </tr>
+      <tr>
+        <th colSpan="2">
+          <b>Cholesterol</b>
+          {this.state.Cholesterol}mg
+        </th>
+        <td>
+          <b>18%</b>
+        </td>
+      </tr>
+      <tr>
+        <th colSpan="2">
+          <b>Sodium</b>
+          {this.state.Sodium}mg
+        </th>
+        <td>
+          <b>2%</b>
+        </td>
+      </tr>
+      <tr>
+        <th colSpan="2">
+          <b>Total Carbohydrate</b>
+          {this.state.total_carbohydrate}g
+        </th>
+        <td>
+          <b>6%</b>
+        </td>
+      </tr>
+      <tr>
+        <td className="blank-cell">
+        </td>
+        <th>
+          Dietary Fiber
+           {this.state.Dietary_fiber}g
+        </th>
+        <td>
+          <b>4%</b>
+        </td>
+      </tr>
+      <tr>
+        <td className="blank-cell">
+        </td>
+        <th>
+          Sugars
+          {this.state.Sugars}g
+        </th>
+        <td>
+        </td>
+      </tr>
+      <tr className="">
+        <th colSpan="2">
+          <b>Protein</b>
+          {this.state.Protein}g
+        </th>
+        <td>
+        </td>
+      </tr>
+      <tr className="thick-end">
+        <th colSpan="2">
+          <b>potassium</b>
+          {this.state.potassium}g
+          
+        </th>
+        <td>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table className="performance-facts__table--grid">
+    <tbody>
+      <tr>
+        <td colSpan="2">
+          Vitamin A
+          10%
+        </td>
+        <td>
+          Vitamin C
+          0%
+        </td>
+      </tr>
+      <tr className="thin-end">
+        <td colSpan="2">
+          Calcium
+          10%
+        </td>
+        <td>
+          Iron
+          6%
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+</div>
+
+    <div>
+        {this.state.items.map(img => <App img={img.photo.thumb}  /> )}
       </div>
+  
+      </div>
+
+      
+     
     );
   }
 }
