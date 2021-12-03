@@ -64,7 +64,7 @@ class PostFormPage extends React.Component {
     };
     fetch(url, options)
     .then(res => {
-      console.log(this.state.content);
+      //console.log(this.state.content);
       
       return res.json()
     })
@@ -88,17 +88,17 @@ class PostFormPage extends React.Component {
  
 
       })
-      console.log(this.state.items)
-      console.log(json)
+      //console.log(this.state.items)
+      //console.log(json)
       const calories = `${this.state.content}: ${json['foods'][0]['nf_calories']}`;
-
+      
       return fetch(url2, {
         method: 'POST',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: {content: calories},
+        body: JSON.stringify({content: calories}),
       })
     })
     .then(res => {
