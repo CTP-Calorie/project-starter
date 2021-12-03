@@ -24,8 +24,7 @@ router.get('/', (req,res) => {
 
 
 router.post('/', passport.isAuthenticated(), (req, res) => {
-  
-  let {content}  = req.body;
+  let content  = req.body;//.content;
   
   Post.create(content)
     .then(post => {

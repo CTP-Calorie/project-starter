@@ -64,7 +64,6 @@ class PostFormPage extends React.Component {
     };
     fetch(url, options)
     .then(res => {
-      //console.log(this.state.content);
       
       return res.json()
     })
@@ -91,7 +90,6 @@ class PostFormPage extends React.Component {
       //console.log(this.state.items)
       //console.log(json)
       const calories = `${this.state.content}: ${json['foods'][0]['nf_calories']}`;
-      
       return fetch(url2, {
         method: 'POST',
         credentials: 'include',
@@ -109,7 +107,6 @@ class PostFormPage extends React.Component {
       throw new Error('Content validation');
     })
     .then(post => {
-      
       this.setState({
         success: true,
         content: post
