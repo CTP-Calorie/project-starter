@@ -10,8 +10,8 @@ function App(props)
 {
   return(
     <div>
-      <ul>
-        <li><img src={props.img} alt='food'/> Serving qty: {props.serving_qty}</li>
+      <ul className='list-group'>
+        <li className='list-group-item'><img src={props.img} alt='food'/> Serving qty: {props.serving_qty}{props.serving_unit}</li>
       </ul>
     </div>
   );
@@ -37,14 +37,27 @@ class PostFormPage extends React.Component {
     total_fat: 0,
     serving_qty : 0,
     serving_unit: " ",
+    totalCal: '',
     items:[]
   }
 
   contentChanged = (event) => {
+    console.log(event.target.value)
     this.setState({
-      content: event.target.value   
+      content: event.target.value 
+      
     });
+
   }
+  contentCalorie = (event) => {
+    console.log(event.target.value)
+    this.setState({
+      totalCal: event.target.value
+      
+    });
+
+  }
+
 
   savePost = (event) => {
     let url = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
@@ -64,7 +77,7 @@ class PostFormPage extends React.Component {
     };
     fetch(url, options)
     .then(res => {
-      
+     
       return res.json()
     })
     .then((json) => {
@@ -82,14 +95,16 @@ class PostFormPage extends React.Component {
         total_carbohydrate : Math.round(json['foods'][0].nf_total_carbohydrate + this.state.total_carbohydrate),
         total_fat : Math.round(json['foods'][0].nf_total_fat + this.state.total_fat),
         serving_qty :  json['foods'][0].serving_qty
+       
 
         // items : json['foods'][0].photo.thumb
  
 
       })
-      //console.log(this.state.items)
-      //console.log(json)
+      console.log(this.state.items)
+     
       const calories = `${this.state.content}: ${json['foods'][0]['nf_calories']}`;
+      
       return fetch(url2, {
         method: 'POST',
         credentials: 'include',
@@ -107,6 +122,7 @@ class PostFormPage extends React.Component {
       throw new Error('Content validation');
     })
     .then(post => {
+      
       this.setState({
         success: true,
         content: post
@@ -142,103 +158,105 @@ class PostFormPage extends React.Component {
           <button className="btn btn-primary" onClick={this.savePost}>Enter Food</button>
         </div>
         <div>
-          <div>
-            <input type='text' placeholder='Enter Target Calories'  />
-            <button className="btn btn-primary">Submit</button>
-          </div>
+          {/* <div>
+            <input type='text' value ={this.state.totalCal}  onChange={this.contentCalorie}placeholder='Enter Target Calories'  />
+            <button className="btn btn-primary ">Submit</button>
+          </div> */}
         </div>
         <div>
-   
-        <section class="nutrition-label simplified-label">
-  <header class="nutrition-header border-b-lg">
-    <h1 class="nutrition-facts border-b">Nutrition Facts</h1>
+        {/* <div>
+          <h1>Target Calorie Goal is :{this.state.totalCal}</h1>
+        </div> */}
+        <section className="nutrition-label simplified-label">
+  <header className="nutrition-header border-b-lg">
+    <h1 className="nutrition-facts border-b">Nutrition Facts</h1>
     {/* <div class="servings">64 servings per container</div> */}
-    <div class="nutrition-row">
+    <div className="nutrition-row">
       {/* <div class="nutrition-column text-md text-bold">Serving size</div>
       <div class="nutrition-column text-md text-bold text-right">1 tbsp</div> */}
     </div>
   </header>
-  <div class="nutrition-row border-b-md">
-    <div class="nutrition-column text-bold">
-      <div class="text-sm">Amount per serving</div>
-      <div class="calories">Calories</div>
+  <div className="nutrition-row border-b-md">
+    <div className="nutrition-column text-bold">
+      <div className="text-sm">Amount per serving</div>
+      <div className="calories">Calories</div>
     </div>
-    <div class="nutrition-column calories amount align-bottom text-right">
+    <div className="nutrition-column calories amount align-bottom text-right">
       {this.state.calories}
     </div>
   </div>
-  <div class="nutrition-row border-b">
-    <div class="nutrition-column text-right text-bold text-sm">
+  <div className="nutrition-row border-b">
+    <div className="nutrition-column text-right text-bold text-sm">
       % DV *
     </div>
   </div>
-  <div class="nutrition-row border-b">
-    <div class="nutrition-column">
-      <span class="text-bold">Total Fat</span> {this.state.total_fat}
+  <div className="nutrition-row border-b">
+    <div className="nutrition-column">
+      <span className="text-bold">Total Fat</span> {this.state.total_fat}
     </div>
-    <div class="nutrition-column text-bold text-right">
+    <div className="nutrition-column text-bold text-right">
       18%
     </div>
   </div>
-  <div class="nutrition-row border-b">
-    <div class="nutrition-column">
-      <span class="text-indent">Saturated Fat {this.state.saturated_fat}g</span>
+  <div className="nutrition-row border-b">
+    <div className="nutrition-column">
+      <span className="text-indent">Saturated Fat {this.state.saturated_fat}g</span>
     </div>
-    <div class="nutrition-column text-bold text-right">
+    <div className="nutrition-column text-bold text-right">
       10%
     </div>
   </div>
-  <div class="nutrition-row border-b">
-    <div class="nutrition-column">
-      <span class="text-indent">
+  <div className="nutrition-row border-b">
+    <div className="nutrition-column">
+      <span className="text-indent">
             <i>Potassium</i> {this.state.potassium}g</span>
     </div>
-    <div class="nutrition-column text-bold text-right">
+    <div className="nutrition-column text-bold text-right">
     </div>
   </div>
-  <div class="nutrition-row border-b">
-    <div class="nutrition-column">
-      <span class="text-indent">Sugars {this.state.Sugars}g</span>
+  <div className="nutrition-row border-b">
+    <div className="nutrition-column">
+      <span className="text-indent">Sugars {this.state.Sugars}g</span>
     </div>
-    <div class="nutrition-column text-bold text-right">
-    </div>
-  </div>
-  <div class="nutrition-row border-b">
-    <div class="nutrition-column">
-      <span class="text-indent">Monounsaturated Fat 6g</span>
-    </div>
-    <div class="nutrition-column text-bold text-right">
+    <div className="nutrition-column text-bold text-right">
     </div>
   </div>
-  <div class="nutrition-row border-b">
-    <div class="nutrition-column">
-      <span class="text-bold">Cholesterol</span> {this.state.Cholesterol}mg
+  <div className="nutrition-row border-b">
+    <div className="nutrition-column">
+      <span className="text-indent">Monounsaturated Fat 6g</span>
     </div>
-    <div class="nutrition-column text-bold text-right">
+    <div className="nutrition-column text-bold text-right">
+    </div>
+  </div>
+  <div className="nutrition-row border-b">
+    <div className="nutrition-column">
+      <span className="text-bold">Cholesterol</span> {this.state.Cholesterol}mg
+    </div>
+    <div className="nutrition-column text-bold text-right">
       0%
     </div>
   </div>
-  <div class="nutrition-row border-b">
-    <div class="nutrition-column">
-      <span class="text-bold">Sodium</span> {this.state.Sodium}
+  <div className="nutrition-row border-b">
+    <div className="nutrition-column">
+      <span className="text-bold">Sodium</span> {this.state.Sodium}
     </div>
-    <div class="nutrition-column text-bold text-right">
+    <div className="nutrition-column text-bold text-right">
       0%
     </div>
   </div>
-  <div class="nutrition-row border-b">
-    <div class="nutrition-column">
-      <span class="text-bold">Total Carbohydrate</span> {this.state.total_carbohydrate}g
+  <div className="nutrition-row border-b">
+    <div className="nutrition-column">
+      <span className="text-bold">Total Carbohydrate</span> {this.state.total_carbohydrate}g
     </div>
-    <div class="nutrition-column text-bold text-right">
+    <div className="nutrition-column text-bold text-right">
       0%
     </div>
   </div>
-  <div class="nutrition-row border-b-md">
-    <div class="nutrition-column">
-      <span class="text-bold">Protein</span> {this.state.Protein}g
+  <div className="nutrition-row border-b-md">
+    <div className="nutrition-column">
+      <span className="text-bold">Protein</span> {this.state.Protein}g
     </div>
-    <div class="nutrition-column text-bold text-right">
+    <div className="nutrition-column text-bold text-right">
       
     </div>
     
@@ -246,12 +264,12 @@ class PostFormPage extends React.Component {
   
   
   <footer>
-    <div class="nutrition-footer">
-      <div class="footnote border-b">
+    <div className="nutrition-footer">
+      <div className="footnote border-b">
         Not a significant source of cholesterol, dietary fiber, total sugars, added sugars, vitamin D, calcium, iron, and potassium
       </div>
     </div>
-    <div class="nutrition-footer">
+    <div className="nutrition-footer">
       * %DV = %Daily Value
     </div>
   </footer>
@@ -261,7 +279,7 @@ class PostFormPage extends React.Component {
 
 
      
-        <div className='col-sm'> {this.state.items.map(img => <App img={img.photo.thumb} serving_qty ={img.serving_qty}  /> )}</div>   
+        <div className='col-sm'> {this.state.items.map(img => <App img={img.photo.thumb} serving_qty ={img.serving_qty} serving_unit={img.serving_unit}  /> )}</div>   
         </div>
    
       
