@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// import './map.scss';
+import './map.scss';
 
 class Map extends Component {
     render() {
