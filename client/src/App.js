@@ -10,6 +10,7 @@ import PostsListPage from './pages/PostsListPage';
 import PostFormPage from './pages/PostFormPage';
 import ShowPostPage from './pages/ShowPostPage';
 import AboutUsPage from './pages/AboutUsPage';
+import NearbyRestaurant from './pages/NearbyRestaurant';
 
 import './App.css';
 import { AuthProvider } from './context/AuthContext';
@@ -25,12 +26,17 @@ function Navigation(props) {
       <ul className="navbar-nav mr-auto">
         <li className="nav-item">
           <NavLink className="nav-link" exact to="/posts/new">
-            Create a Micro Post
+            Calorie
           </NavLink>
         </li>
         <li className="nav-item">
           <NavLink className="nav-link" exact to="/about-us">
             About Us
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" exact to="/Rest">
+            Nearby Restaurant
           </NavLink>
         </li>
       </ul>
@@ -46,14 +52,16 @@ class App extends React.Component {
       <AuthProvider>
         <Router>
           <Navigation />
-          <div className="container-fluid text-center">
-            <div className="row justify-content-center">
+          <div className="">
+            <div className="">
               <Switch>
                 <Route path="/login" component={LoginPage} />
                 <PrivateRoute path="/posts/new" component={PostFormPage} />
                 <Route path="/posts/:id" component={ShowPostPage} />
                 <Route path="/about-us" component={AboutUsPage} />
+                <Route path="/Rest" component={NearbyRestaurant} />
                 <Route path="/" component={PostsListPage} />
+             
               </Switch>
             </div>
           </div>
