@@ -26,11 +26,7 @@ class Sidebar extends Component {
         allReviewsModal.classList.toggle('open');
     }
 
-    // Add Review
-    showAddReviewModal = () => {
-        let addReviewModal = document.querySelector('#add-review');
-        addReviewModal.classList.add('open');
-    }
+
 
     hideAddReviewModal = () => {
         let addReviewModal = document.querySelector('#add-review');
@@ -43,19 +39,7 @@ class Sidebar extends Component {
         let reviewUser = document.querySelector('#review-user');
         let reviewText = document.querySelector('#review-text');
         let reviewRate = document.querySelector('#review-rate');
-        let reviewDate = Math.floor(Date.now() / 1000);
-
-        // Add Review
-        let review = {
-            author_name: reviewUser.value,
-            author_url: '',
-            profile_photo_url: 'https://via.placeholder.com/50',
-            rating: reviewRate.value,
-            text: reviewText.value,
-            time: reviewDate
-        }
-        this.props.placesDetails[this.state.selectedPlace].reviews.push(review);
-        this.props.placesDetails[this.state.selectedPlace].user_ratings_total += 1;
+   
 
         // Hide Modal
         this.hideAddReviewModal();
@@ -127,16 +111,7 @@ class Sidebar extends Component {
         return (
             <div className="sidebar">
                 <div className="options">
-                    <div className="sort">
-                        Sort by: <select id="sortby" onChange={handleSort}>
-                            <option value="0">Any Rating</option>
-                            <option value='1'>+1 ⭐✰✰✰✰</option>
-                            <option value='2'>+2 ⭐⭐✰✰✰</option>
-                            <option value='3'>+3 ⭐⭐⭐✰✰</option>
-                            <option value='4'>+4 ⭐⭐⭐⭐✰</option>
-                        </select>
-                    </div>
-                    <button className="cta" onClick={this.showAddPlaceModal}>Add New Place</button>
+                  
                 </div>
                 <div className="places">
                     {
@@ -155,8 +130,7 @@ class Sidebar extends Component {
                                         </ul>
                                         <strong>{Math.round(place.rating)}</strong>
                                         <span className="all-reviews" onClick={() => this.updateSelectedPlace('all-reviews', index)}>({place.user_ratings_total})</span> 
-                                        <span className="add-review" onClick={() => this.updateSelectedPlace('add-review', index)}>Add Review</span>
-                                        {/* <span className="add-review" onClick={(e) => openReviewModal(index)}>Add Review</span> */}
+                               
                                     </div>
                                     <ul className="info">
                                         <li><i className="fas fa-phone-alt"></i><a href={'tel:' + place.formatted_phone_number}>{place.formatted_phone_number}</a></li>
@@ -232,49 +206,11 @@ class Sidebar extends Component {
                                 <label htmlFor="review-text">Review</label>
                                 <textarea id="review-text" cols="30" rows="10" placeholder="Write your review..." required></textarea>
                             </div>
-                            <button onClick={this.addReview}>Add Review</button>
+                          
                         </form>
                     </div>
                 </div>
-
-                <div className="modal add-place" id="add-place">
-                    <div className="inner">
-                        <div className="close" onClick={this.hideAddPlaceModal}>X</div>
-                        <form action="" onSubmit={e => e.preventDefault()}>
-                            <div className="form-group">
-                                <label htmlFor="place-name">Place Name</label>
-                                <input type="text" id="place-name" placeholder="Ex. The Osmanly Restaurant" required/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="place-address">Address</label>
-                                <input type="text" id="place-address" placeholder="Ex. Kempinski Nile Hotel, Corniche El Nil, 12 Ahmed Raghab Street" required/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="place-latitude">Latitude</label>
-                                <input type="text" id="place-latitude" placeholder="Ex. 48.850073" required/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="place-longitude">Longitude</label>
-                                <input type="text" id="place-longitude" placeholder="Ex. 2.299631" required/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="place-phone">Phone</label>
-                                <input type="text" id="place-phone" placeholder="Ex. 02 27980000" required/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="place-rate">Rating</label>
-                                <select id="place-rate" required>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                            <button onClick={this.addPlace}>Add Place</button>
-                        </form>
-                    </div>
-                </div>         
+    
             </div>
         )
     }
