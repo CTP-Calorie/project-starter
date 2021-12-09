@@ -34,7 +34,7 @@ function AboutUsPage(props) {
 
   
 
-      <hr className="featurette-divider" />
+      {/* <hr className="featurette-divider" />
 
       <div className="row featurette">
         <div className="col-md-7">
@@ -70,7 +70,7 @@ function AboutUsPage(props) {
         </div>
       </div>
 
-      <hr className="featurette-divider"/>
+      <hr className="featurette-divider"/> */}
 
 
 
