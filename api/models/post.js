@@ -14,8 +14,37 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     calories: {
-      type: DataTypes.REAL,
-      
+      type: DataTypes.REAL,     
+    },
+    cholesterol: {
+      type: DataTypes.REAL,     
+    },
+    dietary_fiber: {
+      type: DataTypes.REAL,     
+    },
+    potassium: {
+      type: DataTypes.REAL,     
+    },
+    protein: {
+      type: DataTypes.REAL,     
+    },
+    sugars: {
+      type: DataTypes.REAL,     
+    },
+    saturated_fat: {
+      type: DataTypes.REAL,     
+    },
+    sodium: {
+      type: DataTypes.REAL,     
+    },
+    total_carbohydrate: {
+      type: DataTypes.REAL,     
+    },
+    total_fat: {
+      type: DataTypes.REAL,     
+    },
+    serving_qty: {
+      type: DataTypes.REAL,     
     }
   }, {
     sequelize,

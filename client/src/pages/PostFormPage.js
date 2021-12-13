@@ -100,10 +100,20 @@ class PostFormPage extends React.Component {
         // items : json['foods'][0].photo.thumb
  
 
-      })
-      console.log(this.state.items)
+      });
+      //console.log(this.state.items)
      
-      const calories = `${this.state.content}: ${json['foods'][0]['nf_calories']}`;
+      const foodData = `calories:${Math.round(json['foods'][0].nf_calories + this.state.calories)},
+      cholesterol:${Math.round(json['foods'][0].nf_cholesterol + this.state.Cholesterol)},
+      dietary_fiber:${Math.round(json['foods'][0].nf_dietary_fiber + this.state.Dietary_fiber)},
+      potassium:${Math.round(json['foods'][0].nf_potassium + this.state.potassium)},
+      protein:${Math.round(json['foods'][0].nf_protein + this.state.Protein)},
+      sugars:${Math.round(json['foods'][0].nf_sugars + this.state.Sugars)},
+      saturated_fat:${Math.round(json['foods'][0].nf_saturated_fat + this.state.saturated_fat)},
+      sodium:${Math.round(json['foods'][0].nf_sodium + this.state.Sodium)},
+      total_carbohydrate:${Math.round(json['foods'][0].nf_total_carbohydrate + this.state.total_carbohydrate)},
+      total_fat:${Math.round(json['foods'][0].nf_total_fat + this.state.total_fat)},
+      serving_qty:${json['foods'][0].serving_qty}`;
       
       return fetch(url2, {
         method: 'POST',
@@ -111,7 +121,7 @@ class PostFormPage extends React.Component {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({content: calories}),
+        body: JSON.stringify({content: foodData}),
       })
     })
     .then(res => {
