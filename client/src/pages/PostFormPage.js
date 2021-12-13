@@ -58,7 +58,6 @@ class PostFormPage extends React.Component {
 
   }
 
-
   savePost = (event) => {
     let url = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
     const url2 = '/api/posts/';
@@ -103,7 +102,8 @@ class PostFormPage extends React.Component {
       });
       //console.log(this.state.items)
      
-      const foodData = `calories:${Math.round(json['foods'][0].nf_calories + this.state.calories)},
+      const foodData = `content: ${this.state.content},
+      calories:${Math.round(json['foods'][0].nf_calories + this.state.calories)},
       cholesterol:${Math.round(json['foods'][0].nf_cholesterol + this.state.Cholesterol)},
       dietary_fiber:${Math.round(json['foods'][0].nf_dietary_fiber + this.state.Dietary_fiber)},
       potassium:${Math.round(json['foods'][0].nf_potassium + this.state.potassium)},

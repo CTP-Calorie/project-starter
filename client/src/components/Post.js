@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Post({ content, createdAt, id }) {
-  console.log(content);
+  console.log(typeof JSON.parse(content));
   return (
     <div className="col-10 col-md-8 col-lg-7">
       <div className="card mb-4 shadow">
