@@ -7,7 +7,12 @@ const AuthButton = withRouter(({ history }) => {
   const auth = useContext(AuthContext);
 
   if(!auth.isAuthenticated) {
-    return <Link className="btn btn-primary" to="/login">Login</Link>;
+    return (
+      <div>
+    <Link className="btn btn-primary" to="/login">Login</Link>
+     <Link className="btn btn-primary" to="/signup">Register</Link>
+     </div>
+    );
   }
 
   const logout = () => {

@@ -22,6 +22,7 @@ class LoginPage extends React.Component {
   login = (e) => {
     e.preventDefault();
     const auth = this.context;
+    console.log(auth);
     let { email, password } = this.state;
     auth.authenticate(email, password)
       .then((user) => {
@@ -30,12 +31,13 @@ class LoginPage extends React.Component {
       .catch((err) => {
         this.setState({ failed: true });
       });
+      console.log(auth);
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { from } = this.props.location.state || { from: { pathname: '/Homepage' } };
     const { redirectToReferrer, failed } = this.state;
-
+    console.log(failed);
     if (redirectToReferrer) {
       return <Redirect to={from} />;
     }

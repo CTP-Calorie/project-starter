@@ -19,7 +19,18 @@ const AuthProvider = ({ children }) => {
       .then(body => setUser(body))
       .catch(err => setUser(false))
   }, [])
-
+const newAcc = (firstName,lastName,email,password) => {
+  return fetch('/api/auth/signup', {
+    method: 'POST',
+    body: JSON.stringify({ firstName, lastName, email, password }),
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+    .then((res) => {
+      res.json()
+    })
+}
   const authenticate = (email, password) => {
     return fetch('/api/auth/login', {
       method: 'POST',
@@ -64,6 +75,7 @@ const AuthProvider = ({ children }) => {
   return (
     <Provider
       value={{
+        newAcc,
         authenticate,
         signout,
         isAuthenticated: user ? true : false,

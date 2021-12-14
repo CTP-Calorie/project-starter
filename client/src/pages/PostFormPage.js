@@ -11,7 +11,7 @@ const {x_app_id, x_app_key} = require('./src/secrets.json');
 function App(props)
 
 {
-  const [cal, setcal] = useState('')
+
 
   return(
     <div>
@@ -286,10 +286,10 @@ console.log(this.state.content);
   </div>
   <div className="nutrition-row border-b">
     <div className="nutrition-column">
-      <span className="text-bold">Total Fat</span> {this.state.total_fat}
+      <span className="text-bold">Total Fat</span> {this.state.total_fat}g
     </div>
     <div className="nutrition-column text-bold text-right">
-      18%
+      0%
     </div>
   </div>
   <div className="nutrition-row border-b">
@@ -297,13 +297,13 @@ console.log(this.state.content);
       <span className="text-indent">Saturated Fat {this.state.saturated_fat}g</span>
     </div>
     <div className="nutrition-column text-bold text-right">
-      10%
+      0%
     </div>
   </div>
   <div className="nutrition-row border-b">
     <div className="nutrition-column">
       <span className="text-indent">
-            <i>Potassium</i> {this.state.potassium}g</span>
+            <i>Potassium</i> {this.state.potassium}mg</span>
     </div>
     <div className="nutrition-column text-bold text-right">
     </div>
@@ -317,7 +317,7 @@ console.log(this.state.content);
   </div>
   <div className="nutrition-row border-b">
     <div className="nutrition-column">
-      <span className="text-indent">Monounsaturated Fat 6g</span>
+      <span className="text-indent">dietary fiber {this.state.Dietary_fiber}g</span>
     </div>
     <div className="nutrition-column text-bold text-right">
     </div>
@@ -332,7 +332,7 @@ console.log(this.state.content);
   </div>
   <div className="nutrition-row border-b">
     <div className="nutrition-column">
-      <span className="text-bold">Sodium</span> {this.state.Sodium}
+      <span className="text-bold">Sodium</span> {this.state.Sodium}mg
     </div>
     <div className="nutrition-column text-bold text-right">
       0%

@@ -17,6 +17,7 @@ import './App.css';
 import { AuthProvider } from './context/AuthContext';
 import AuthButton from './components/AuthButton';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage'
 import PrivateRoute from './components/PrivateRoute';
 
 
@@ -63,6 +64,7 @@ class App extends React.Component {
             <div className="">
               <Switch>
                 <Route path="/login" component={LoginPage} />
+                <Route path="/signup" component={RegisterPage} />
                 <PrivateRoute path="/posts/new" component={PostFormPage} />
                 <Route path="/posts/:id" component={ShowPostPage} />
                 <Route path="/about-us" component={AboutUsPage} />
