@@ -7,26 +7,26 @@ function AboutUsPage(props) {
   
 
    
-<div className='bg-info'>
-    <div className="container marketing">
+<div className='this '>
+    <div className=" container marketing">
 
       <div className="row">
         <div className="col-lg-4">
-          <img className="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder " width="140" height="140" />
+          <img className="rounded-circle" src="" alt="Generic placeholder " width="140" height="140" />
           <h2 className='information'> Seth Marcus</h2>
-          <p className='about'>Donec sed odio dui.  Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+          <p className='about'>Queens College.</p>
           <p ><a className="btn btn-secondary" href="#" role="button">View details »</a></p>
         </div>
         <div className="col-lg-4">
-          <img className="rounded-circle" src="../images/Javier.jpg" alt="Generic placeholder " width="150" height="150"/>
+          <img className="rounded-circle" src="./images/Javier.jpg" alt="Generic placeholder " width="150" height="150"/>
           <h2 className='information'>Javier Majano</h2>
           <p className='about'>CUNY John Jay Student</p>
           <p><a className="btn btn-secondary" href="https://infinite-anchorage-16926.herokuapp.com/"   target="_blank" rel="noopener noreferrer"role="button">My website »</a></p>
         </div>
         <div className="col-lg-4">
-          <img className="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder " width="140" height="140"/>
+          <img className="rounded-circle" src="" alt="Generic placeholder " width="140" height="140"/>
           <h2 className='information'>Evan Adis</h2>
-          <p className='about'>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. VFusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p className='about'>Brooklyn College.</p>
           <p><a className="btn btn-secondary" href="#" role="button">View details »</a></p>
         </div>
       </div>

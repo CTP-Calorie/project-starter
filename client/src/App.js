@@ -11,6 +11,7 @@ import PostFormPage from './pages/PostFormPage';
 import ShowPostPage from './pages/ShowPostPage';
 import AboutUsPage from './pages/AboutUsPage';
 import NearbyRestaurant from './pages/NearbyRestaurant';
+import HomePage from './pages/HomePage'
 
 import './App.css';
 import { AuthProvider } from './context/AuthContext';
@@ -21,12 +22,18 @@ import PrivateRoute from './components/PrivateRoute';
 
 function Navigation(props) {
   return (
-    <nav className="navbar navbar-expand-sm navbar-dark bg-dark shadow mb-3">
-      <Link className="navbar-brand" to="/">Micro Blog</Link>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
+      <Link className="navbar-brand" to="/HomePage">Home page</Link>
       <ul className="navbar-nav mr-auto">
         <li className="nav-item">
           <NavLink className="nav-link" exact to="/posts/new">
             Calorie
+          </NavLink>
+        
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" exact to="/">
+            Log
           </NavLink>
         </li>
         <li className="nav-item">
@@ -60,8 +67,9 @@ class App extends React.Component {
                 <Route path="/posts/:id" component={ShowPostPage} />
                 <Route path="/about-us" component={AboutUsPage} />
                 <Route path="/Rest" component={NearbyRestaurant} />
+                <Route path="/HomePage" component={HomePage} />
                 <Route path="/" component={PostsListPage} />
-             
+               
               </Switch>
             </div>
           </div>

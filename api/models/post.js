@@ -4,7 +4,7 @@ const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {}
-
+  
   Post.init({
     content: {
       type: DataTypes.STRING,
@@ -14,37 +14,39 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     calories: {
-      type: DataTypes.REAL,     
+      type: DataTypes.REAL,
+      
+      
     },
     cholesterol: {
-      type: DataTypes.REAL,     
+      type: DataTypes.REAL,
+      
+      
     },
     dietary_fiber: {
-      type: DataTypes.REAL,     
-    },
-    potassium: {
-      type: DataTypes.REAL,     
-    },
-    protein: {
-      type: DataTypes.REAL,     
+      type : DataTypes.REAL
     },
     sugars: {
-      type: DataTypes.REAL,     
-    },
-    saturated_fat: {
-      type: DataTypes.REAL,     
-    },
-    sodium: {
-      type: DataTypes.REAL,     
+      type : DataTypes.REAL
     },
     total_carbohydrate: {
-      type: DataTypes.REAL,     
+      type : DataTypes.REAL
     },
+    sodium: {
+      type : DataTypes.REAL
+    },
+    saturated_fat: {
+      type : DataTypes.REAL
+    },
+    potassium: {
+      type : DataTypes.REAL
+    }    ,
+    protein: {
+      type : DataTypes.REAL
+    }
+    ,
     total_fat: {
-      type: DataTypes.REAL,     
-    },
-    serving_qty: {
-      type: DataTypes.REAL,     
+      type : DataTypes.REAL
     }
   }, {
     sequelize,

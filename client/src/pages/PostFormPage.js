@@ -1,17 +1,23 @@
-  import React from 'react';
+import React,{useState,useEffect} from 'react';
 import '../pages/nutrition.scss'
+import './about.css';
 import { Redirect } from 'react-router-dom';
 const {x_app_id, x_app_key} = require('./src/secrets.json');
+
 
 
 //const authorization = require('./auth/credentials.json');
 
 function App(props)
+
 {
+  const [cal, setcal] = useState('')
+
   return(
     <div>
       <ul className='list-group'>
         <li className='list-group-item'><img src={props.img} alt='food'/> Serving qty: {props.serving_qty}{props.serving_unit}</li>
+
       </ul>
     </div>
   );
@@ -19,7 +25,71 @@ function App(props)
 }
 
 
+
 class PostFormPage extends React.Component {
+
+
+  componentWillUnmount(){
+    
+    localStorage.setItem('Calories', parseInt(this.state.calories));
+    localStorage.setItem('Cholesterol', parseInt(this.state.Cholesterol));
+    localStorage.setItem('Dietary_fiber', parseInt(this.state.Dietary_fiber));
+    localStorage.setItem('potassium', parseInt(this.state.potassium));
+    localStorage.setItem('Protein', parseInt(this.state.Protein));
+    localStorage.setItem('Sugars', parseInt(this.state.Sugars));
+    localStorage.setItem('saturated_fat', parseInt(this.state.saturated_fat));
+    localStorage.setItem('Sodium', parseInt(this.state.Sodium));
+    localStorage.setItem('total_carbohydrate', parseInt(this.state.total_carbohydrate));
+    localStorage.setItem('total_fat', parseInt(this.state.total_fat));
+    localStorage.setItem('items', JSON.stringify(this.state.items))
+    console.log(JSON.parse(localStorage.getItem('items')).length);
+    // localStorage.clear()
+  //  console.log(this.state.items.length);
+  //  console.log('before leaving' , localStorage.getItem('Calories'));
+
+  }
+  componentDidMount(){
+    console.log('i mounted');
+    console.log(JSON.stringify(this.state.items).length);
+    console.log(localStorage.getItem('items').length);
+    console.log(JSON.parse(localStorage.getItem('items')));
+    if(JSON.stringify(this.state.items).length !== localStorage.getItem('items').length)
+    {
+       
+      const newItems = JSON.parse(localStorage.getItem('items'))
+      console.log('coming back' , localStorage.getItem('Calories'));
+      console.log(newItems)
+      newItems.map((foods) =>  
+            
+        this.setState({
+        items: JSON.parse(localStorage.getItem('items')),
+        calories : Math.round(this.state.calories + localStorage.getItem('Calories')),
+        Cholesterol : Math.round(this.state.Cholesterol + localStorage.getItem('Cholesterol')),
+        Dietary_fiber : Math.round(this.state.Dietary_fiber + localStorage.getItem('Dietary_fiber')),
+        potassium : Math.round(this.state.potassium + localStorage.getItem('potassium')),
+        Protein : Math.round(this.state.Protein+ localStorage.getItem('Protein')),
+        Sugars : Math.round(this.state.Sugars + localStorage.getItem('Sugars')),
+        saturated_fat : Math.round(this.state.saturated_fat+ localStorage.getItem('saturated_fat')),
+        Sodium : Math.round(this.state.Sodium + localStorage.getItem('Sodium')),
+        total_carbohydrate : Math.round(this.state.total_carbohydrate + localStorage.getItem('total_carbohydrate')),
+        total_fat : Math.round(this.state.total_fat+ localStorage.getItem('total_fat')),
+        }), console.log(newItems.nf_calories))
+      
+   
+    }
+    else{
+      console.log('this same');
+      console.log(JSON.parse(localStorage.getItem('items')).length);
+      console.log(this.state.items.length);
+      
+    }
+
+    let num = parseInt((localStorage.getItem('Calories')))
+    console.log(typeof(num));
+    console.log(typeof(localStorage.getItem('Calories')));
+    
+    console.log(typeof(this.state.calories));
+  }
   state = {
     error: false,
     success: false,
@@ -38,29 +108,41 @@ class PostFormPage extends React.Component {
     serving_qty : 0,
     serving_unit: " ",
     totalCal: '',
+    foodSearch: '',
     items:[]
   }
 
+
+
+
   contentChanged = (event) => {
     console.log(event.target.value)
+    
+
     this.setState({
-      content: event.target.value 
+      foodSearch: event.target.value 
+
       
     });
-
+ 
   }
-  contentCalorie = (event) => {
-    console.log(event.target.value)
-    this.setState({
-      totalCal: event.target.value
+  // contentCalorie = (event) => {
+  //   console.log(event.target.value)
+  //   this.setState({
+  //     totalCal: event.target.value
       
-    });
+  //   });
 
-  }
+  
+
+
+
 
   savePost = (event) => {
     let url = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
     const url2 = '/api/posts/';
+    
+
     
     const options = {
       method: 'POST',
@@ -70,7 +152,7 @@ class PostFormPage extends React.Component {
         'Content-Type': 'application/json'
       },
       body: `{
-        "query": "${this.state.content}",
+        "query": "${this.state.foodSearch}",
         "timezone": "US/Eastern"
         }`,
     };
@@ -80,8 +162,8 @@ class PostFormPage extends React.Component {
       return res.json()
     })
     .then((json) => {
-      
-      this.setState({items : this.state.items.concat(json['foods']) })
+
+     
       this.setState({
         calories : Math.round(json['foods'][0].nf_calories + this.state.calories),
         Cholesterol : Math.round(json['foods'][0].nf_cholesterol + this.state.Cholesterol),
@@ -93,35 +175,40 @@ class PostFormPage extends React.Component {
         Sodium : Math.round(json['foods'][0].nf_sodium + this.state.Sodium),
         total_carbohydrate : Math.round(json['foods'][0].nf_total_carbohydrate + this.state.total_carbohydrate),
         total_fat : Math.round(json['foods'][0].nf_total_fat + this.state.total_fat),
-        serving_qty :  json['foods'][0].serving_qty
+        serving_qty :  json['foods'][0].serving_qty,
+        items : this.state.items.concat(json['foods'])
        
 
         // items : json['foods'][0].photo.thumb
  
 
-      });
-      //console.log(this.state.items)
-     
-      const foodData = `content: ${this.state.content},
-      calories:${Math.round(json['foods'][0].nf_calories + this.state.calories)},
-      cholesterol:${Math.round(json['foods'][0].nf_cholesterol + this.state.Cholesterol)},
-      dietary_fiber:${Math.round(json['foods'][0].nf_dietary_fiber + this.state.Dietary_fiber)},
-      potassium:${Math.round(json['foods'][0].nf_potassium + this.state.potassium)},
-      protein:${Math.round(json['foods'][0].nf_protein + this.state.Protein)},
-      sugars:${Math.round(json['foods'][0].nf_sugars + this.state.Sugars)},
-      saturated_fat:${Math.round(json['foods'][0].nf_saturated_fat + this.state.saturated_fat)},
-      sodium:${Math.round(json['foods'][0].nf_sodium + this.state.Sodium)},
-      total_carbohydrate:${Math.round(json['foods'][0].nf_total_carbohydrate + this.state.total_carbohydrate)},
-      total_fat:${Math.round(json['foods'][0].nf_total_fat + this.state.total_fat)},
-      serving_qty:${json['foods'][0].serving_qty}`;
+      })
       
+ 
+      const calories = `${this.state.content}: ${json['foods'][0]['nf_calories']}`;
+      console.log(json['foods'][0]);
+      const content = {
+        content : json['foods'][0]['food_name'],
+        calories : json['foods'][0]['nf_calories'],
+        cholesterol : json['foods'][0]['nf_cholesterol'],
+        dietary_fiber: json['foods'][0]['nf_dietary_fiber'],
+        total_fat: json['foods'][0]['nf_total_fat'],
+        saturated_fat: json['foods'][0]['nf_saturated_fat'],
+        sodium: json['foods'][0]['nf_sodium'],
+        total_carbohydrate: json['foods'][0]['nf_total_carbohydrate'],
+        sugars: json['foods'][0]['nf_sugars'],
+        protein: json['foods'][0]['nf_protein'],
+        potassium: json['foods'][0]['nf_potassium'],
+
+
+      }
       return fetch(url2, {
         method: 'POST',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({content: foodData}),
+        body: JSON.stringify({content: content}),
       })
     })
     .then(res => {
@@ -146,8 +233,10 @@ class PostFormPage extends React.Component {
     })    
   }
 
+
+
   render() {
-    if(this.state.success) return <Redirect to="/" />;
+    // if(this.state.success) return <Redirect to="/" />;
 
     let errorMessage = null;
     if(this.state.error) {
@@ -157,26 +246,21 @@ class PostFormPage extends React.Component {
         </div>
       );
     }
-
+console.log(this.state.content);
     return (
-      <div className="col-10 col-md-8 col-lg-7">
-        { errorMessage }
+        <div className='photo'>
+      <div className="calorie container-fluid text-center col-10 col-md-8 col-lg-7">
+        {/* { errorMessage } */}
         <div className="input-group">
           <input 
-            type="text"  placeholder="Please Enter 1 food item"  value={this.state.content}className="form-control mr-3 rounded"onChange={this.contentChanged}
+            type="text"  placeholder="Please Enter 1 food item"  value={this.state.foodSearch}className="form-control mr-3 rounded"onChange={this.contentChanged}
             required />
           <button className="btn btn-primary" onClick={this.savePost}>Enter Food</button>
+          
+          
         </div>
         <div>
-          {/* <div>
-            <input type='text' value ={this.state.totalCal}  onChange={this.contentCalorie}placeholder='Enter Target Calories'  />
-            <button className="btn btn-primary ">Submit</button>
-          </div> */}
-        </div>
-        <div>
-        {/* <div>
-          <h1>Target Calorie Goal is :{this.state.totalCal}</h1>
-        </div> */}
+       
         <section className="nutrition-label simplified-label">
   <header className="nutrition-header border-b-lg">
     <h1 className="nutrition-facts border-b">Nutrition Facts</h1>
@@ -293,7 +377,7 @@ class PostFormPage extends React.Component {
         </div>
    
       
-     
+        </div>   
     );
   }
 }

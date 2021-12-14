@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700;800&display=swap');
 
 .wrapper{
-    background-color: #4682B4;
+    background-color: hsl(207, 44%, 49%);
+    height: 100vh
 }
 .information{
     color: white;
@@ -10,4 +11,51 @@
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
     font-size: 1.2rem;
+}
+.this{
+ height: 100vh;
+ background-image: url('./images/plant.jpg');
+}
+.calorie{
+  
+    height: 100vh;
+
+    
+}
+.photo{
+    background-image: url('./food.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.masthead{
+    background-image: url('./images/harvest.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.logger{
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+
+}
+.page-section{
+
+background-color: #191919;
+ height: 400px;
+}
+
+.cover{
+    height: 100vh;
+    background: #6a11cb;
+      /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
 }

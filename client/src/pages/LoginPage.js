@@ -1,4 +1,5 @@
 import React from 'react';
+import './about.css'
 import { Redirect } from 'react-router-dom';
 
 import { AuthContext } from '../context/AuthContext';
@@ -45,29 +46,25 @@ class LoginPage extends React.Component {
     }
 
     return (
+      <div className='cover'>
+      <div className='logger container-fluid text-center col-10 col-md-8 col-lg-7'>
+      <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+              <p class="text-white-50 mb-5">Please enter your email and password!</p>
+        <div className='formContent'>
       <form onSubmit={this.login}>
         <div className="form-row">
           { err }
-          <input
-            type="email"
-            className="form-control"
-            name="email"
-            placeholder="Email"
-            value={this.state.email}
-            onChange={this.fieldChanged('email')} />
-          <input
-            type="password"
-            className="form-control"
-            name="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.fieldChanged('password')} />
+          <input type="email" className="form-control"  name="email" placeholder="Email" value={this.state.email} onChange={this.fieldChanged('email')} />
+          <input  type="password" className="form-control" name="password" placeholder="Password" value={this.state.password} onChange={this.fieldChanged('password')} />
           <button
             type="submit"
             className="btn btn-primary ml-auto"
           >Login</button>
         </div>
       </form>
+      </div>
+      </div>
+      </div>
     );
   }
 }

@@ -17,12 +17,14 @@ $font-black: "Arial Black", "Helvetica Black", "Arial-BoldMT";
   padding: 5px;
   line-height: 1.2;
   width: 260px;
+  background-color: antiquewhite;
   .nutrition-facts {
     font-family: $font-black;
     margin: 0 0 2px 0;
     padding-bottom: 2px;
     font-size: 28px;
     line-height: 1;
+  
   }
   .nutrition-header {
     padding-bottom: 2px;
@@ -90,6 +92,7 @@ $font-black: "Arial Black", "Helvetica Black", "Arial-BoldMT";
   &.simplified-label {
     .footnote {
       padding-bottom: 5px;
+     
     }
   }
 }

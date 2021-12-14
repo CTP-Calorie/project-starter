@@ -65,7 +65,7 @@ class App extends Component {
         type: ['restaurant']
     }
     
-    infowindow = new window.google.maps.InfoWindow();
+    infowindow = new window.google.maps.InfoWindow;
     service = new window.google.maps.places.PlacesService(map);
     service.nearbySearch(request, this.callback);
   }

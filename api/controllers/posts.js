@@ -24,11 +24,22 @@ router.get('/', (req,res) => {
 
 
 router.post('/', passport.isAuthenticated(), (req, res) => {
-  let content  = req.body;
-  
-  console.log(`CONTENT: ${req.body.content}`);
+  let content  = req.body.content;
+  console.log(content)
+  Post.create({
+    calories : content.calories, 
+    cholesterol : content.cholesterol,
+    content : content.content,
+    dietary_fiber : content.dietary_fiber,
+    potassium : content.potassium,
+    protein : content.protein,
+    saturated_fat : content.saturated_fat,
+    total_carbohydrate : content.total_carbohydrate,
+    sugars : content.sugars,
+    total_fat : content.total_fat,
+    sodium : content.sodium
 
-  Post.create(content)
+      })
     .then(post => {
       res.status(201).json(post);
     })
