@@ -54,6 +54,7 @@ class RegisterPage extends React.Component {
 
     return (
       <div>
+        
         <section class="vh-100 bg-image" >
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
@@ -67,21 +68,21 @@ class RegisterPage extends React.Component {
               { err }
                 <div class="form-outline mb-4">
                 <input type="text" className="form-control form-control-lg"  name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.fieldChanged('firstName')} />
-                  <label class="form-label" for="form3Example1cg">First Name</label>
+               
                 </div>
                 <div class="form-outline mb-4">
                 <input  type="text" className="form-control form-control-lg" name="lastName" placeholder="Last Name" value={this.state.lastName} onChange={this.fieldChanged('lastName')} />
-                  <label class="form-label" for="form3Example1cg">Last Name Name</label>
+             
                 </div>
 
                 <div class="form-outline mb-4">
                 <input type="email" className="form-control form-control-lg"  name="email" placeholder="Email" value={this.state.email} onChange={this.fieldChanged('email')} />
-                  <label class="form-label" for="form3Example3cg">Your Email</label>
+                
                 </div>
 
                 <div class="form-outline mb-4">
                 <input  type="password" className="form-control form-control-lg" name="password" placeholder="Password" value={this.state.password} onChange={this.fieldChanged('password')} />
-                  <label class="form-label" for="form3Example4cg">Password</label>
+                
                 </div>
             
                <div class="d-flex justify-content-center">

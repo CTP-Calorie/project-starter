@@ -58,14 +58,14 @@ export default function IndexPage() {
                         <div className="mt-5">
                             <div className="mb-2"><i className="bi-globe fs-1 text-primary"></i></div>
                             <h3 className="h4 mb-2 text-white">Calorie</h3>
-                            <p className="text-white mb-0">Watch how much calries you have taken in</p>
+                            <p className="text-white mb-0">Watch how much calories you have taken in</p>
                         </div>
                     </div>
                     <div className="col-lg-3 col-md-6 text-center">
                         <div className="mt-5">
                             <div className="mb-2"><i className="bi-heart fs-1 text-primary"></i></div>
-                            <h3 className="h4 mb-2 text-white">Made with Love</h3>
-                            <p className="text-white mb-0">Is it really open source if it's not made with love?</p>
+                            <h3 className="h4 mb-2 text-white">Nearby Restaurants</h3>
+                            <p className="text-white mb-0">displaying restrauants menu with nutrtion information in your area</p>
                         </div>
                     </div>
                 </div>

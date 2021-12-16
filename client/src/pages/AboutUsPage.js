@@ -12,22 +12,36 @@ function AboutUsPage(props) {
 
       <div className="row">
         <div className="col-lg-4">
-          <img className="rounded-circle" src="" alt="Generic placeholder " width="140" height="140" />
+          <img className="rounded-circle" src="./images/avatar.png" alt="Generic placeholder " width="140" height="140" />
           <h2 className='information'> Seth Marcus</h2>
+          <ul className='about'>
+            <li>
+            Email: sethjmarcus@gmail.com
+            </li>
+            <li>Github: https://github.com/sethjmarcus</li>
+          </ul>
           <p className='about'>Queens College.</p>
-          <p ><a className="btn btn-secondary" href="#" role="button">View details »</a></p>
+          <p ><a className="btn btn-secondary" href="#" role="button">View my website »</a></p>
         </div>
         <div className="col-lg-4">
-          <img className="rounded-circle" src="./images/Javier.jpg" alt="Generic placeholder " width="150" height="150"/>
+          <img className="rounded-circle" src="./images/avatar.png" alt="Generic placeholder " width="150" height="150"/>
           <h2 className='information'>Javier Majano</h2>
           <p className='about'>CUNY John Jay Student</p>
-          <p><a className="btn btn-secondary" href="https://infinite-anchorage-16926.herokuapp.com/"   target="_blank" rel="noopener noreferrer"role="button">My website »</a></p>
+
+          <p><a className="btn btn-secondary" href="https://javiermajano.herokuapp.com/"   target="_blank" rel="noopener noreferrer"role="button">View my website»</a></p>
         </div>
         <div className="col-lg-4">
-          <img className="rounded-circle" src="" alt="Generic placeholder " width="140" height="140"/>
+          <img className="rounded-circle" src="./images/avatar.png" alt="Generic placeholder " width="140" height="140"/>
           <h2 className='information'>Evan Adis</h2>
+          <ul className='about'>
+            <li>
+            Email: ev12adis@gmail.com
+            </li>
+            <li>Github: https://github.com/ev12adis</li>
+
+          </ul>
           <p className='about'>Brooklyn College.</p>
-          <p><a className="btn btn-secondary" href="#" role="button">View details »</a></p>
+          <p><a className="btn btn-secondary" href="#" role="button">View my website »</a></p>
         </div>
       </div>
 
